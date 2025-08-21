@@ -15,6 +15,7 @@ services:
       - ./docker/nginx/proxy/htpasswd/:/etc/nginx/htpasswd/
     networks:
       - bypass_stack
+    restart: unless-stopped
 
   frontend:
     build:
@@ -25,6 +26,7 @@ services:
       dockerfile: ./docker/Dockerfile.frontend
     networks:
       - bypass_stack
+    restart: unless-stopped
 
   bypassweb:
     depends_on:
@@ -41,6 +43,7 @@ services:
       - "${IP:?IP var is required. Please check the docs.}:443:443"
     networks:
       - bypass_stack
+    restart: unless-stopped
 
   bypassproxy:
     depends_on:
@@ -55,6 +58,7 @@ services:
       - ./docker/nginx/proxy/htpasswd/:/etc/nginx/htpasswd/
     networks:
       - bypass_stack
+    restart: unless-stopped
 
 networks:
   bypass_stack:
