@@ -70,7 +70,7 @@ const Header = () => {
           </nav>
           
           <Button variant="outline" className="border-primary/20 hover:bg-primary/5" asChild>
-            <a href="https://github.com/bnt0p/BypassDNS" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/BypassDNS/BypassDNS" target="_blank" rel="noopener noreferrer">
               <Github className="h-4 w-4 mr-2" />
               GitHub
             </a>
