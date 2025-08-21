@@ -7,7 +7,7 @@ Now, with assistance of AI (lovable.dev), which gave me fancy frontend pages, di
 
 ![header](https://i.imgur.com/v23jvOx.png)
 
-## Should I ran this locally?
+## Should I run this locally?
 
 Well. This will depend on how much are you willing to spend, debug, code, configure. However, you are free to take this and try it locally. Just check the recommendations on the following texts.
 
