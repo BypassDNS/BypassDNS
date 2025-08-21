@@ -141,14 +141,14 @@ def expired_links():
     timer.start()
     return
 
-def HtmlInjection (expire, ip):
+def HtmlInjection (expire, ip, protocol):
     injection = (
         '<meta charset="UTF-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
         '<style>.topbar_bypassdns{position:fixed;top:10px;left:10px;z-index:9999;background-color:#f0f0f0;padding:8px 12px;border:1px solid #ccc;border-radius:6px;font-size:14px;font-family:Arial;color:#333;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.countdown_bypassdns{font-weight:bold;color:#e74c3c}</style>'
         '<div class="topbar_bypassdns" id="topbar_bypassdns">This link expires in '
         '<span id="countdown_bypassdns_div" class="countdown_bypassdns">Loading...</span><br>'
-        f'You\'re accessing: <a style="color:MediumSeaGreen;" href="https://domain-bypassdns" target="_blank">https://domain-bypassdns</a><br>'
+        f'You\'re accessing: <a style="color:MediumSeaGreen;" href="{protocol}://domain-bypassdns" target="_blank">{protocol}://domain-bypassdns</a><br>'
         f'On the IP: <span id="ip-bypassdns" style="color:MediumSeaGreen;">{ip}</span>'
         '</div>'
         '<script>'

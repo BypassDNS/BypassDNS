@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Globe, Github } from "lucide-react";
+import { Globe, Github, ChevronsLeftRightEllipsis } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const Header = () => {
@@ -69,12 +69,20 @@ const Header = () => {
             </button>
           </nav>
           
-          <Button variant="outline" className="border-primary/20 hover:bg-primary/5" asChild>
-            <a href="https://github.com/BypassDNS/BypassDNS" target="_blank" rel="noopener noreferrer">
-              <Github className="h-4 w-4 mr-2" />
-              GitHub
-            </a>
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button variant="outline" className="border-primary/20 hover:bg-primary/5" asChild>
+              <a href="https://discord.gg/fwjtsMKMqC" target="_blank" rel="noopener noreferrer">
+                <ChevronsLeftRightEllipsis className="h-4 w-4 mr-2" />
+                Discord
+              </a>
+            </Button>
+            <Button variant="outline" className="border-primary/20 hover:bg-primary/5" asChild>
+              <a href="https://github.com/bnt0p/BypassDNS" target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4 mr-2" />
+                GitHub
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </header>

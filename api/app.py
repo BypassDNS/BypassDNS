@@ -143,7 +143,7 @@ async def createlink():
         await create_files(domain, ip, tempdomain, protocol, port, username, password, disableHtmlJsInjection)
         data = {"created": 1, "link": f"{tempdomain}.{reverse_domain}","msg": "Success"}
         if use_webhook == "Yes":
-            webhook_msg = f"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\nCreator: **{request.headers.get("Cf-Connecting-Ip")}**\nTime:**{datetime.now()}**\nDomain: **{domain}**\nIP: **{ip}**\nTemp link: **{tempdomain}.{reverse_domain}**\n\nProtocol: **{protocol}**\nPort:**{port}**\nHtml injection?:**{disableHtmlJsInjection}**\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
+            webhook_msg = f"Creator: **{request.headers.get("Cf-Connecting-Ip")}**\nTime:**{datetime.now()}**\nDomain: **{domain}**\nIP: **{ip}**\nTemp link: **{tempdomain}.{reverse_domain}**\n\nProtocol: **{protocol}**\nPort:**{port}**\nHtml injection?:**{disableHtmlJsInjection}**\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
             await webhook_send(1, webhook_msg)
 
         return json.dumps(data)
@@ -177,7 +177,7 @@ async def index(path):
     if proxy.headers.get("Content-Type").startswith("text/html"):
         if request.headers.get("BypassDNS-Disable-HtmlInjection") == "False":
             html = proxy.content.decode("utf-8", errors="ignore")
-            html = html.replace("</head>", f"\n{HtmlInjection(request.headers.get('BypassDNS-Expiration-Proxy'), request.headers.get('BypassDNS-IP-Proxy'))}\n</head>", 1)
+            html = html.replace("</head>", f"\n{HtmlInjection(request.headers.get('BypassDNS-Expiration-Proxy'), request.headers.get('BypassDNS-IP-Proxy'), request.headers.get("BypassDNS-Protocol"))}\n</head>", 1)
             return Response(html, mimetype=proxy.headers.get("Content-Type"))
 
     return Response(proxy.content, mimetype=proxy.headers.get("Content-Type"))
