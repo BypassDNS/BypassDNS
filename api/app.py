@@ -32,6 +32,10 @@ async def batchlink():
                 "msg": f"Your body does not seems to be a json . . ."}
         return json.dumps(data), 400
     
+    if "turnstileToken" not in request.get_json():
+        data = {"created": 0, "link": None, "msg": f"No turnstileToken on your request."}
+        return json.dumps(data), 400
+
     cf = await cloudflare_verify(request.get_json()["turnstileToken"], request.headers.get("Cf-Connecting-Ip"))
     if not cf:
         data = {"created": 0, "link": None, "msg": f"Captcha failed!"}
@@ -93,6 +97,10 @@ async def createlink():
                 "msg": f"Your body does not seems to be a json . . ."}
         return json.dumps(data), 400
     
+    if "turnstileToken" not in request.get_json():
+        data = {"created": 0, "link": None, "msg": f"No turnstileToken on your request."}
+        return json.dumps(data), 400
+
     cf = await cloudflare_verify(request.get_json()["turnstileToken"], request.headers.get("Cf-Connecting-Ip"))
 
     if not cf:
