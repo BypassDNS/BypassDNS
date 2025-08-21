@@ -9,7 +9,7 @@ services:
       DC_WEBHOOK: ${DC_WEBHOOK:?DC_WEBHOOK var is required. Please check the docs.}
       REMOVAL_WEBHOOK: ${REMOVAL_WEBHOOK:?REMOVAL_WEBHOOK var is required. Please check the docs.}
       USE_WEBHOOK: ${USE_WEBHOOK:?USE_WEBHOOK var is required. Please check the docs.}
-      ABUSE_EMAIL: ${ABUSE_EMAIL}
+      ABUSE_EMAIL: ${ABUSE_EMAIL:?ABUSE_EMAIL var is required. Please check the docs.}
     volumes:
       - ./docker/nginx/proxy/temp-vhosts/:/etc/nginx/conf.d/
       - ./docker/nginx/proxy/htpasswd/:/etc/nginx/htpasswd/
