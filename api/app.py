@@ -71,18 +71,19 @@ async def batchlink():
     if use_webhook == "Yes":
         for entry in templinks:
             webhook_msg += (
-                f"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n"
+                f"#----------------------------\n"
                 f"Creator: **{request.headers.get("Cf-Connecting-Ip")}**\n"
                 f"Time:**{datetime.now()}**\n"
                 f"Domain: **{entry['domain']}**\n"
-                f"IP: **{entry['ip']}**\n\n"
+                f"IP: **{entry['ip']}**\n"
+                f"Temp link: **{tempdomain}.{reverse_domain}**\n\n"
                 f"Protocol: **{entry['protocol']}**\n"
                 f"Port:**{entry['port']}**\n"
                 f"Html injection?:**{disableHtmlJsInjection}**\n"
-                f"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n"
+                f"#----------------------------\n"
             )
 
-        webhook_send(1, webhook_msg)
+        await webhook_send(1, webhook_msg)
     return json.dumps(templinks), 200
 
 
@@ -134,9 +135,10 @@ async def createlink():
 
         await create_files(domain, ip, tempdomain, protocol, port, username, password, disableHtmlJsInjection)
         data = {"created": 1, "link": f"{tempdomain}.{reverse_domain}","msg": "Success"}
+        print(use_webhook)
         if use_webhook == "Yes":
-            webhook_msg = f"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\nCreator: **{request.headers.get("Cf-Connecting-Ip")}**\nTime:**{datetime.now()}**\nDomain: **{domain}**\nIP: **{ip}**\n\nProtocol: **{protocol}**\nPort:**{port}**\nHtml injection?:**{disableHtmlJsInjection}**\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
-            webhook_send(1, webhook_msg)
+            webhook_msg = f"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\nCreator: **{request.headers.get("Cf-Connecting-Ip")}**\nTime:**{datetime.now()}**\nDomain: **{domain}**\nIP: **{ip}**\nTemp link: **{tempdomain}.{reverse_domain}**\n\nProtocol: **{protocol}**\nPort:**{port}**\nHtml injection?:**{disableHtmlJsInjection}**\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
+            await webhook_send(1, webhook_msg)
 
         return json.dumps(data)
 

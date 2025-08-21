@@ -37,10 +37,10 @@ def random_char(y):
     return ''.join(random.choice(string.ascii_letters) for x in range(y))
 
 
-def webhook_send(type, msg):
-    if not webhook_url or removal_webhook:
+async def webhook_send(type, msg):
+    print(webhook_url, removal_webhook)
+    if not webhook_url or not removal_webhook:
         return
-    
     payload = {"content": msg}
     headers = {"Content-Type": "application/json"}
     match type:

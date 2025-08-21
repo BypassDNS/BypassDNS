@@ -8,6 +8,7 @@ services:
       DOMAIN: ${DOMAIN_NAME:?DOMAIN_NAME var is required. Please check the docs.}
       DC_WEBHOOK: ${DC_WEBHOOK:?DC_WEBHOOK var is required. Please check the docs.}
       REMOVAL_WEBHOOK: ${REMOVAL_WEBHOOK:?REMOVAL_WEBHOOK var is required. Please check the docs.}
+      USE_WEBHOOK: ${USE_WEBHOOK:?USE_WEBHOOK var is required. Please check the docs.}
       ABUSE_EMAIL: ${ABUSE_EMAIL}
     volumes:
       - ./docker/nginx/proxy/temp-vhosts/:/etc/nginx/conf.d/
@@ -52,9 +53,6 @@ services:
     volumes:
       - ./docker/nginx/proxy/temp-vhosts/:/etc/nginx/conf.d/
       - ./docker/nginx/proxy/htpasswd/:/etc/nginx/htpasswd/
-    # ports:
-    #   - "${WILDCARD_IP:?WILDCARD_IP var is required. Please check the docs.}:80:80"
-    #   - "${WILDCARD_IP:?WILDCARD_IP var is required. Please check the docs.}:443:443"
     networks:
       - bypass_stack
 
