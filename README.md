@@ -97,7 +97,7 @@ You are more than welcome to send pull requests with new ideas/suggestions. By n
 ```
 MIT License
 
-Copyright (c) 2025 - bnt0p
+Copyright (c) 2025 - bnt0p <bnt0p@bypassdns.link>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
