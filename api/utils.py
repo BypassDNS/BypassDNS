@@ -38,7 +38,6 @@ def random_char(y):
 
 
 async def webhook_send(type, msg):
-    print(webhook_url, removal_webhook)
     if not webhook_url or not removal_webhook:
         return
     payload = {"content": msg}
@@ -127,10 +126,8 @@ def expired_links():
                         if now > expiration:
                             htpasswd_file = f"/etc/nginx/htpasswd/{filename.replace(".conf", "")}_htpasswd"
                             if os.path.isfile(htpasswd_file):
-                                print(f"Found: {htpasswd_file}")
                                 os.remove(f"/etc/nginx/htpasswd/{filename.replace(".conf", "")}_htpasswd")
 
-                            print(f"Expired: {filename} (expired at {expiration})")
                             message += f"Expired: **{filename}** (expired at **{expiration}**)\n"
                             message += "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n"
                             os.remove(f"/etc/nginx/conf.d/{filename}")
