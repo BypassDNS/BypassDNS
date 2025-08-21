@@ -10,6 +10,7 @@ Now, with assistance of AI (lovable.dev), which gave me fancy frontend pages, di
 # About the HTML injection
 
 Please note that this HTML injection is only to show data about this temporary link. What **IP, DOMAIN it's accessing and WHEN the link expires**:
+
 ![html](https://i.imgur.com/kgOSu5m.png)
 
 ## Should I run this locally?
