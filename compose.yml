@@ -1,0 +1,62 @@
+services:
+  backend:
+    build:
+      dockerfile: ./docker/Dockerfile.backend
+    tty: true
+    environment:
+      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:?TURNSTILE_SECRET_KEY var is required. Please check the docs.}
+      DOMAIN: ${DOMAIN_NAME:?DOMAIN_NAME var is required. Please check the docs.}
+      DC_WEBHOOK: ${DC_WEBHOOK:?DC_WEBHOOK var is required. Please check the docs.}
+      REMOVAL_WEBHOOK: ${REMOVAL_WEBHOOK:?REMOVAL_WEBHOOK var is required. Please check the docs.}
+      ABUSE_EMAIL: ${ABUSE_EMAIL}
+    volumes:
+      - ./docker/nginx/proxy/temp-vhosts/:/etc/nginx/conf.d/
+      - ./docker/nginx/proxy/htpasswd/:/etc/nginx/htpasswd/
+    networks:
+      - bypass_stack
+
+  frontend:
+    build:
+      args:
+        VITE_TURNSTILE_SITE_KEY: ${VITE_TURNSTILE_SITE_KEY:?VITE_TURNSTILE_SITE_KEY var is required. Please check the docs.}
+        VITE_DOMAIN: ${DOMAIN_NAME:?DOMAIN_NAME var is required. Please check the docs.}
+        VITE_API_URL: "api.${DOMAIN_NAME:?DOMAIN_NAME var is required. Please check the docs.}"
+      dockerfile: ./docker/Dockerfile.frontend
+    networks:
+      - bypass_stack
+
+  bypassweb:
+    depends_on:
+      frontend:
+        condition: service_started
+      backend:
+        condition: service_started
+    build:
+      dockerfile: ./docker/Dockerfile.web
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME:?DOMAIN_NAME var is required. Please check the docs.}
+    ports:
+      - "${IP:?IP var is required. Please check the docs.}:80:80"
+      - "${IP:?IP var is required. Please check the docs.}:443:443"
+    networks:
+      - bypass_stack
+
+  bypassproxy:
+    depends_on:
+      backend:
+        condition: service_started
+    build:
+      dockerfile: ./docker/Dockerfile.proxy
+    environment:
+      - AUTORELOAD_FILES="/etc/nginx/conf.d"
+    volumes:
+      - ./docker/nginx/proxy/temp-vhosts/:/etc/nginx/conf.d/
+      - ./docker/nginx/proxy/htpasswd/:/etc/nginx/htpasswd/
+    # ports:
+    #   - "${WILDCARD_IP:?WILDCARD_IP var is required. Please check the docs.}:80:80"
+    #   - "${WILDCARD_IP:?WILDCARD_IP var is required. Please check the docs.}:443:443"
+    networks:
+      - bypass_stack
+
+networks:
+  bypass_stack:

@@ -1,0 +1,3 @@
+venv/
+api/__pycache__
+website/node_modules/

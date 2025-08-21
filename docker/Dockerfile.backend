@@ -1,0 +1,10 @@
+FROM python:3.12
+ENV TZ="America/Sao_Paulo"
+WORKDIR /app
+COPY ./api/ /app/
+RUN pip install -r requirements.txt
+RUN mkdir -p /etc/nginx/conf.d/
+RUN mkdir -p /etc/nginx/htpasswd/
+RUN apt-get update && apt-get install -y ca-certificates apache2-utils && rm -rf /var/lib/apt/lists/*
+EXPOSE 5000
+CMD ["waitress-serve", "--host=0.0.0.0", "--port=5000", "--threads=100","app:app" ]
