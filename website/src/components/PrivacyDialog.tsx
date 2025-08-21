@@ -75,12 +75,12 @@ export const PrivacyDialog = () => {
                     <p className="mt-2">
                       <strong>Repository:</strong>{" "}
                       <a 
-                        href="https://github.com/bnt0p/bypassdns" 
+                        href="https://github.com/BypassDNS/BypassDNS" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-primary hover:underline"
                       >
-                        github.com/bnt0p/bypassdns
+                        https://github.com/BypassDNS/BypassDNS
                       </a>
                     </p>
                     <p className="mt-1 text-xs">Feel free to review the source code to verify our privacy claims and understand exactly how your data is handled.</p>
