@@ -158,7 +158,7 @@ async def index(path):
     for h in require_headers:
         if not request.headers.get(h):
             return Response("", status=403)
-
+    print(request.headers)
     requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
     headers = {"Host": request.headers.get('BypassDNS-Domain-Proxy'),"X-Forwarded-For": request.headers.get("X-Forwarded-For"),"User-Agent": f"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36/1.0 | This request came from a temporary BypassDNS link: {request.headers.get('Referer')} | report abuse at {abuse_email}","Content-Security-Policy": "upgrade-insecure-requests","X-Real-IP": request.headers["X-Real-Ip"]}
     if request.method == "POST":
@@ -177,7 +177,7 @@ async def index(path):
     if proxy.headers.get("Content-Type").startswith("text/html"):
         if request.headers.get("BypassDNS-Disable-HtmlInjection") == "False":
             html = proxy.content.decode("utf-8", errors="ignore")
-            html = html.replace("</head>", f"{HtmlInjection(request.headers.get('BypassDNS-Expiration-Proxy'))}\n</head>", 1)
+            html = html.replace("</head>", f"\n{HtmlInjection(request.headers.get('BypassDNS-Expiration-Proxy'), request.headers.get('BypassDNS-IP-Proxy'))}\n</head>", 1)
             return Response(html, mimetype=proxy.headers.get("Content-Type"))
 
     return Response(proxy.content, mimetype=proxy.headers.get("Content-Type"))
