@@ -163,7 +163,7 @@ def HtmlInjection (expire, ip, protocol):
         'var hours=Math.floor((distance_bypassdns%(1000*60*60*24))/(1000*60*60));'
         'var minutes=Math.floor((distance_bypassdns%(1000*60*60))/(1000*60));'
         'var seconds=Math.floor((distance_bypassdns%60000)/1000);'
-        'document.getElementById("countdown_bypassdns_div").innerHTML=days+"d "+hours+"h "+minutes+"m "+seconds+"s ";'
+        'document.getElementById("countdown_bypassdns_div").innerHTML=hours+"h "+minutes+"m "+seconds+"s ";'
         'if(distance_bypassdns<0){clearInterval(x);location.reload();document.getElementById("countdown_bypassdns_div").innerHTML="EXPIRED";}'
         '},1000);'
         '</script>'

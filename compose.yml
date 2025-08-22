@@ -1,6 +1,7 @@
 services:
   backend:
     build:
+      context: .
       dockerfile: ./docker/Dockerfile.backend
     tty: true
     environment:
@@ -24,6 +25,7 @@ services:
         VITE_DOMAIN: ${DOMAIN_NAME:?DOMAIN_NAME var is required. Please check the docs.}
         VITE_API_URL: "api.${DOMAIN_NAME:?DOMAIN_NAME var is required. Please check the docs.}"
       dockerfile: ./docker/Dockerfile.frontend
+      context: .
     networks:
       - bypass_stack
     restart: unless-stopped
@@ -36,6 +38,7 @@ services:
         condition: service_started
     build:
       dockerfile: ./docker/Dockerfile.web
+      context: .
     environment:
       DOMAIN_NAME: ${DOMAIN_NAME:?DOMAIN_NAME var is required. Please check the docs.}
     ports:
@@ -51,6 +54,7 @@ services:
         condition: service_started
     build:
       dockerfile: ./docker/Dockerfile.proxy
+      context: .
     environment:
       - AUTORELOAD_FILES="/etc/nginx/conf.d"
     volumes:
