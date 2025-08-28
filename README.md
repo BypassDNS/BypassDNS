@@ -35,7 +35,7 @@ By default, everything is already set up on the compose.yml file and the Dockerf
 
 You can clone the repository with git clone:
 ```bash
-git clone https://github.com/BypassDNS/bypassdns-stack.git && cd bypassdns-stack
+git clone https://github.com/BypassDNS/BypassDNS.git && cd bypassdns-stack
 ```
 
 Once you have the stack cloned to your machine, you can start setting up the .env files. You should rename the .env.example that is on the root directory of the repository.
