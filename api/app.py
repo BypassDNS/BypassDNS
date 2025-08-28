@@ -86,7 +86,7 @@ async def batchlink():
                 f"#----------------------------\n"
             )
 
-        await webhook_send(1, webhook_msg)
+        webhook_send(1, webhook_msg)
     return json.dumps(templinks), 200
 
 
@@ -144,7 +144,7 @@ async def createlink():
         data = {"created": 1, "link": f"{tempdomain}.{reverse_domain}","msg": "Success"}
         if use_webhook == "Yes":
             webhook_msg = f"Creator: **{request.headers.get("Cf-Connecting-Ip")}**\nTime:**{datetime.now()}**\nDomain: **{domain}**\nIP: **{ip}**\nTemp link: **{tempdomain}.{reverse_domain}**\n\nProtocol: **{protocol}**\nPort:**{port}**\nHtml injection?:**{disableHtmlJsInjection}**\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
-            await webhook_send(1, webhook_msg)
+            webhook_send(1, webhook_msg)
 
         return json.dumps(data)
 
