@@ -158,9 +158,9 @@ async def index(path):
     for h in require_headers:
         if not request.headers.get(h):
             return Response("", status=403)
-
+        
     requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
-    headers = {"Host": request.headers.get('BypassDNS-Domain-Proxy'),"X-Forwarded-For": request.headers.get("X-Forwarded-For"),"User-Agent": f"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36/1.0 | This request came from a temporary BypassDNS link: {request.headers.get('Referer')} | report abuse at {abuse_email}","Content-Security-Policy": "upgrade-insecure-requests","X-Real-IP": request.headers["X-Real-Ip"]}
+    headers = {"Host": request.headers.get('BypassDNS-Domain-Proxy'),"X-Forwarded-For": request.headers.get("X-Forwarded-For"),"User-Agent": f"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36/1.0 | This request came from a temporary BypassDNS link: {request.headers.get('BypassDNS-Temp-Domain')} | report abuse at {abuse_email}","Content-Security-Policy": "upgrade-insecure-requests","X-Real-IP": request.headers["X-Real-Ip"], "X-Forwarded-Proto": request.headers.get("BypassDNS-Protocol")}
     if request.method == "POST":
         if request.headers.get("BypassDNS-Port") != "None":
             proxy = requests.post(f'{request.headers.get("BypassDNS-Protocol")}://{request.headers.get('BypassDNS-IP-Proxy')}:{request.headers.get("BypassDNS-Port")}{request.path}', data=request.body.decode('utf-8'), headers=request.headers, verify=False)
@@ -179,5 +179,5 @@ async def index(path):
             html = proxy.content.decode("utf-8", errors="ignore")
             html = html.replace("</head>", f"\n{HtmlInjection(request.headers.get('BypassDNS-Expiration-Proxy'), request.headers.get('BypassDNS-IP-Proxy'), request.headers.get("BypassDNS-Protocol"))}\n</head>", 1)
             return Response(html, mimetype=proxy.headers.get("Content-Type"))
-
+    
     return Response(proxy.content, mimetype=proxy.headers.get("Content-Type"))

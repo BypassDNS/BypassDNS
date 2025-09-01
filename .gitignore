@@ -5,3 +5,4 @@ venv/
 website/node_modules/
 docker/nginx/proxy/temp-vhosts/*
 .github
+monitoring/
