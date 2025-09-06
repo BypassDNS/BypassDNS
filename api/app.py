@@ -79,7 +79,7 @@ async def batchlink():
                 f"Time:**{datetime.now()}**\n"
                 f"Domain: **{entry['domain']}**\n"
                 f"IP: **{entry['ip']}**\n"
-                f"Temp link: **{tempdomain}.{reverse_domain}**\n\n"
+                f"Temp link: **{entry['link']}**\n\n"
                 f"Protocol: **{entry['protocol']}**\n"
                 f"Port:**{entry['port']}**\n"
                 f"Html injection?:**{disableHtmlJsInjection}**\n"
