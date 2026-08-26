@@ -88,8 +88,7 @@ The containers beside the first nginx (AKA bypassdns-bypassweb) is only one expo
 
 # Issues
 
-As far as I know, and tested, I didn't encounter any **ISSUES** so far. However, if you face anything on the [https://bypassdns.dev](https://bypassdns.dev) website, please open an issue on this GitHub, or if you don't want to public share your the **IP** and **Domain**, please open a ticket/message on our discord community
-
+As far as I know, and tested, I didn't encounter any **ISSUES** so far. However, if you face anything on the [https://bypassdns.dev](https://bypassdns.dev) website, please open an issue on this GitHub.
 [![discord](https://i.imgur.com/JZ3koyr.png)](https://discord.gg/fwjtsMKMqC)
 
 # Pull Requests
